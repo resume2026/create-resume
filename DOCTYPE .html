@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Resume</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --nav-blue: #2563eb; 
+            --deep-blue: #1e3a8a;
+            --accent-green: #10b981; 
+            --dark-bg: #020617; 
+            --text: #cbd5e1;
+            --border-light: #e2e8f0;
+            --header-height: 80px;
+        }
+        
+        body, html { margin: 0; padding: 0; font-family: 'Inter', sans-serif; background: var(--dark-bg); color: white; height: 100%; overflow: hidden; }
+
+        /* --- PERSISTENT NAVIGATION --- */
+        nav { 
+            position: fixed; top: 0; width: 100%; height: var(--header-height);
+            display: flex; justify-content: center; align-items: center; gap: 40px; 
+            background: rgba(2, 6, 23, 0.95); backdrop-filter: blur(15px); z-index: 5000; 
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        nav a { color: white; text-decoration: none; font-weight: 600; font-size: 0.85rem; letter-spacing: 1px; transition: 0.3s; cursor: pointer; }
+        nav a:hover { color: var(--nav-blue); }
+        .active-nav { color: var(--nav-blue) !important; border-bottom: 2px solid var(--nav-blue); padding-bottom: 5px; }
+
+        /* --- PAGE CONTAINERS --- */
+        .page-content { padding-top: var(--header-height); height: calc(100vh - var(--header-height)); overflow: hidden; }
+
+        /* --- HOME PAGE --- */
+        #home-page { 
+            display: flex; 
+            background: linear-gradient(rgba(30, 58, 138, 0.8), rgba(2, 6, 23, 0.95)), 
+                        url('https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover; background-position: center;
+            flex-direction: column; align-items: center; justify-content: center; text-align: center;
+        }
+        .hero-glass { 
+            background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(20px); 
+            padding: 60px; border-radius: 40px; border: 1px solid rgba(255,255,255,0.1); 
+            max-width: 850px; box-shadow: 0 40px 100px rgba(0,0,0,0.5);
+        }
+        .cta-btn { background: var(--nav-blue); color: white; padding: 18px 45px; border-radius: 50px; font-weight: 800; border: none; cursor: pointer; font-size: 1.1rem; transition: 0.3s; }
+
+        /* --- IMPROVE PAGE --- */
+        #improve-page { display: none; background: var(--dark-bg); align-items: center; justify-content: center; }
+        .fb-card { background: #0f172a; padding: 40px; border-radius: 30px; width: 90%; max-width: 450px; text-align: center; border: 1px solid var(--deep-blue); }
+        .fb-card input, .fb-card textarea { width: 100%; padding: 15px; margin-bottom: 15px; border-radius: 12px; border: 1px solid var(--deep-blue); background: var(--dark-bg); color: white; box-sizing: border-box; }
+
+        /* --- BUILDER PAGE --- */
+        #builder-page { 
+            display: none; width: 100%; 
+            grid-template-columns: 400px 1fr; background: #f8fafc; 
+            color: #0f172a;
+        }
+        .sidebar { background: white; border-right: 1px solid var(--border-light); padding: 30px; overflow-y: auto; display: flex; flex-direction: column; }
+        .preview { background: #334155; padding: 40px; overflow-y: auto; display: flex; justify-content: center; position: relative; }
+        
+        .download-container { position: sticky; top: 0; right: 0; width: 100%; display: flex; justify-content: flex-end; padding-bottom: 20px; z-index: 10; }
+        .dl-btn { background: var(--accent-green); color: white; padding: 12px 25px; border-radius: 10px; font-weight: 800; border: none; cursor: pointer; box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
+
+        /* Resume Sheet */
+        .sheet { width: 210mm; min-height: 297mm; background: white; padding: 50px; box-shadow: 0 40px 80px rgba(0,0,0,0.5); font-size: 12px; }
+        .res-head { display: flex; align-items: center; gap: 20px; border-bottom: 4px solid var(--nav-blue); padding-bottom: 25px; margin-bottom: 25px; }
+        .res-photo { width: 110px; height: 110px; border-radius: 12px; object-fit: cover; display: none; border: 2px solid #eee; }
+        .res-name { font-size: 2.5rem; font-weight: 800; color: var(--nav-blue); margin: 0; }
+        .res-section-title { font-weight: 800; text-transform: uppercase; color: var(--nav-blue); border-bottom: 1px solid #eee; padding-bottom: 5px; margin-top: 25px; margin-bottom: 10px; }
+
+        @media print {
+            nav, .sidebar, .download-container { display: none !important; }
+            .page-content { padding-top: 0; height: auto; overflow: visible; }
+            #builder-page { display: block; }
+            .preview { padding: 0; background: white; }
+            .sheet { box-shadow: none; width: 100%; margin: 0; border: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav id="top-nav">
+        <a id="link-home" onclick="showPage('home')" class="active-nav">HOME</a>
+        <a id="link-improve" onclick="showPage('improve')">HELP US IMPROVE</a>
+        <a id="link-builder" onclick="showPage('builder')">MAKE RESUME</a>
+    </nav>
+
+    <div class="page-content">
+        <div id="home-page" style="height: 100%;">
+            <div class="hero-glass">
+                <h1>Elite Resume Architecture</h1>
+                <p>Construct a powerful career document with precision tools and professional aesthetics. we provide 100% free resume creative platform aslo you can tell us how to improve this more in help us improve section.</p>
+                <button class="cta-btn" onclick="showPage('builder')">Start Building Now</button>
+            </div>
+        </div>
+
+        <div id="improve-page" style="height: 100%;">
+            <div class="fb-card">
+                <h2 style="color:var(--nav-blue); margin-top:0;">SYSTEM FEEDBACK</h2>
+                <form action="https://formspree.io/f/mqakpjne" method="POST">
+                    <input type="email" name="email" placeholder="Your Gmail" required>
+                    <textarea name="message" placeholder="Report a bug or suggest a feature..." rows="5" required></textarea>
+                    <button type="submit" class="cta-btn" style="width:100%;">Send Message</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="builder-page" style="height: 100%;">
+            <div class="sidebar">
+                <h3 style="color:var(--nav-blue); margin-bottom:15px;">Editor Tools</h3>
+                
+                <label>Photo</label><input type="file" accept="image/*" onchange="loadPhoto(this)" style="margin-bottom:15px;">
+                <label>Theme Color</label><input type="color" id="style-color" value="#2563eb" oninput="updateStyles()" style="height:35px; cursor:pointer; margin-bottom:15px;">
+
+                <label>Full Name</label><input type="text" id="in-name" oninput="sync()">
+                <label>Contact Info</label><input type="text" id="in-contact" oninput="sync()">
+                <label>Summary</label><textarea id="in-sum" rows="3" oninput="sync()"></textarea>
+                <label>Experience</label><textarea id="in-exp" rows="5" oninput="sync()"></textarea>
+                <label>Education</label><textarea id="in-edu" rows="2" oninput="sync()"></textarea>
+                <label>Skills</label><input type="text" id="in-skills" oninput="sync()">
+                <label>Hobbies</label><input type="text" id="in-hobbies" oninput="sync()">
+            </div>
+
+            <div class="preview">
+                <div class="sheet">
+                    <div class="download-container">
+                        <button class="dl-btn" onclick="window.print()">Download PDF</button>
+                    </div>
+                    <div class="res-head" id="out-header-line">
+                        <img id="out-photo" class="res-photo">
+                        <div>
+                            <center>
+                               <h1 id="out-name" class="res-name">Your Name</h1>
+                            </center>
+                            <div id="out-contact" style="font-weight:500; color:#64748b;">Contact Details</div>
+                        </div>
+                    </div>
+                    <div class="res-section-title">Professional Summary</div>
+                    <div id="out-sum" style="white-space:pre-line;">Narrative...</div>
+                    <div class="res-section-title">Work Experience</div>
+                    <div id="out-exp" style="white-space:pre-line;">Career history...</div>
+                    <div class="res-section-title">Education</div>
+                    <div id="out-edu" style="white-space:pre-line;">Degrees...</div>
+                    <div class="res-section-title">Skills & Hobbies</div>
+                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <div>
+                            <strong style="color:var(--nav-blue); font-size:0.7rem;">CORE SKILLS</strong>
+                            <div id="out-skills">Skills...</div>
+                        </div>
+                        <div>
+                            <strong style="color:var(--nav-blue); font-size:0.7rem;">INTERESTS</strong>
+                            <div id="out-hobbies">Hobbies...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showPage(pageId) {
+            // Hide all
+            document.getElementById('home-page').style.display = 'none';
+            document.getElementById('improve-page').style.display = 'none';
+            document.getElementById('builder-page').style.display = 'none';
+            
+            // Show target
+            if (pageId === 'home') document.getElementById('home-page').style.display = 'flex';
+            if (pageId === 'improve') document.getElementById('improve-page').style.display = 'flex';
+            if (pageId === 'builder') document.getElementById('builder-page').style.display = 'grid';
+
+            // Update Nav Highlight
+            document.querySelectorAll('nav a').forEach(a => a.classList.remove('active-nav'));
+            document.getElementById('link-' + pageId).classList.add('active-nav');
+        }
+
+        function loadPhoto(input) {
+            const file = input.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = e => { 
+                    const img = document.getElementById('out-photo');
+                    img.src = e.target.result; img.style.display = 'block'; 
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function updateStyles() {
+            const color = document.getElementById('style-color').value;
+            document.getElementById('out-header-line').style.borderBottomColor = color;
+            document.getElementById('out-name').style.color = color;
+            document.querySelectorAll('.res-section-title').forEach(t => t.style.color = color);
+        }
+
+        function sync() {
+            document.getElementById('out-name').innerText = document.getElementById('in-name').value || "Your Name";
+            document.getElementById('out-contact').innerText = document.getElementById('in-contact').value || "Contact Info";
+            document.getElementById('out-sum').innerText = document.getElementById('in-sum').value || "Professional narrative...";
+            document.getElementById('out-exp').innerText = document.getElementById('in-exp').value || "Detailed career history...";
+            document.getElementById('out-edu').innerText = document.getElementById('in-edu').value || "Academic background...";
+            document.getElementById('out-skills').innerText = document.getElementById('in-skills').value || "Key expertise...";
+            document.getElementById('out-hobbies').innerText = document.getElementById('in-hobbies').value || "Personal interests...";
+        }
+    </script>
+</body>
+</html>
